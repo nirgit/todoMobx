@@ -1,0 +1,15 @@
+{
+  "name": "todo_mobx",
+  "version": "1.0.0",
+  "description": "A simple Todo app based on Mobx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nir M",
+  "license": "ISC",
+  "dependencies": {
+    "mobx": "^3.1.9",
+    "mobx-react": "^4.1.8"
+  }
+}
