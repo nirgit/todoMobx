@@ -1,11 +1,16 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './app';
+
+console.log(App);
+
 function start() {
   console.log('Starting TODO App');
-  const title = document.createElement('h1');
-  title.innerHTML = 'Yoga MobX';
 
-  document.body.appendChild(title);
+  var appDiv = document.getElementById('app');
 
-  console.log('done..');
+  ReactDOM.render(<App />, appDiv);
 }
 
 start();
