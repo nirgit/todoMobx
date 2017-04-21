@@ -6,7 +6,7 @@ import Store from './store';
 
 function start() {
   console.log('Starting TODO App');
-  const store = new Store();
+  const store = Store();
 
   var appDiv = document.getElementById('app');
 
