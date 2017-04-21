@@ -10,7 +10,7 @@ function start() {
 
   var appDiv = document.getElementById('app');
 
-  ReactDOM.render(<App todos={store.todos} />, appDiv);
+  window.app = ReactDOM.render(<App todos={store.todos} />, appDiv);
 }
 
 start();
