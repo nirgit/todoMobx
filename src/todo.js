@@ -9,7 +9,8 @@ const idGen = (() => {
 
 const Todo = (val) => ({
     value: val,
-    id: idGen()
+    id: idGen(),
+    isDone: false
   });
 
 export default Todo;

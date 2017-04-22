@@ -21,18 +21,32 @@ class App extends React.Component {
 
   addTodo(todoToAdd) {
     if (todoToAdd && todoToAdd.length > 2) {
-      this.props.todos.push(Todo(todoToAdd));
+      this.props.store.todos.push(Todo(todoToAdd));
       this.refs.todoInput.value = '';
     }
   }
 
+  toggleCheck(todo) {
+    todo.isDone = !todo.isDone;
+  }
+
+  clearAllDones() {
+    const incompletedTodos = this.props.store.incompletedTodos;
+    this.props.store.todos.clear();
+    this.props.store.todos.push(...incompletedTodos);
+  }
+
   render() {
     return <div>
-        <h1>My (Mobx) Todo App to be</h1>
+        <h1>My (Mobx) Todo App</h1>
         <div>
           <span>Add</span><input ref='todoInput' type='text' onKeyUp={(e) => this.addTodoByKey(e)}></input><button onClick={(e) => this.addTodoByClick(e)}>Add</button>
         </div>
-        <ul>{this.props.todos.map(todo => (<li key={todo.id}>{todo.value}</li>))}</ul>
+        <ul>{this.props.store.todos.map(todo => (<li key={todo.id}><input type="checkbox" onClick={this.toggleCheck.bind(this, todo)} checked={todo.isDone}/>{todo.value}</li>))}</ul>
+
+        <div>
+          <a href="#" onClick={this.clearAllDones.bind(this)}>Clear all "Done"s</a>
+        </div>
       </div>;
   }
 }
