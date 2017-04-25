@@ -42,7 +42,8 @@ class App extends React.Component {
       background: '#8bc34a',
       position: 'absolute',
       height: '100%',
-      width: (200 * (this.props.store.totalCompleted / (this.props.store.todos.length || 1))) + 'px'
+      width: (200 * (this.props.store.totalCompleted / (this.props.store.todos.length || 1))) + 'px',
+      transition: '0.25s ease width'
     };
 
     return <div>
