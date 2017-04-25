@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {observer} from 'mobx-react';
 
-import Todo from './todo';
+import ProgressBar from './progressBar';
+
+import Todo from '../todo';
 
 @observer
 class App extends React.Component {
@@ -37,28 +39,21 @@ class App extends React.Component {
   }
 
   render() {
-    const progressStyle = {
-      maxWidth: '200px',
-      background: '#8bc34a',
-      position: 'absolute',
-      height: '100%',
-      width: (200 * (this.props.store.totalCompleted / (this.props.store.todos.length || 1))) + 'px',
-      transition: '0.25s ease width'
-    };
-
     return <div>
         <h1>My (Mobx) Todo App</h1>
 
-        <div style={{'border': '1px solid black', 'width': '200px', 'textAlign': 'center', 'position': 'relative', 'marginBottom': '10px'}}>
-          <div style={progressStyle}></div>
-          <div style={{'position': 'relative', 'fontSize': 'large', 'fontWeight': '900'}}>Progress</div>
-        </div>
+        <ProgressBar value={this.props.store.totalCompleted} total={this.props.store.todos.length} />
 
         <div>
           <span>Add</span><input ref='todoInput' type='text' onKeyUp={(e) => this.addTodoByKey(e)}></input><button onClick={(e) => this.addTodoByClick(e)}>Add</button>
         </div>
 
-        <ul>{this.props.store.todos.map(todo => (<li key={todo.id}><input type="checkbox" onClick={this.toggleCheck.bind(this, todo)} checked={todo.isDone}/>{todo.value}</li>))}</ul>
+        <ul>{this.props.store.todos.map(todo =>
+            (<li key={todo.id}>
+                <input type="checkbox" onClick={this.toggleCheck.bind(this, todo)} checked={todo.isDone}/>{todo.value}
+              </li>)
+            )}
+        </ul>
 
         <div>
           <a href="#" onClick={this.clearAllDones.bind(this)}>Clear all "Done"s</a>
