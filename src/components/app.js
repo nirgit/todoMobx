@@ -4,7 +4,7 @@ import {observer} from 'mobx-react';
 
 import ProgressBar from './progressBar';
 
-import Todo from '../todo';
+import {addTodoAction, toggleTodoDoneAction, clearTodosAction} from '../actions/actions';
 
 @observer
 class App extends React.Component {
@@ -23,19 +23,17 @@ class App extends React.Component {
 
   addTodo(todoToAdd) {
     if (todoToAdd && todoToAdd.length > 2) {
-      this.props.store.todos.push(Todo(todoToAdd));
+      this.props.dispatcher.dispatch(addTodoAction(todoToAdd));
       this.refs.todoInput.value = '';
     }
   }
 
   toggleCheck(todo) {
-    todo.isDone = !todo.isDone;
+    this.props.dispatcher.dispatch(toggleTodoDoneAction(todo.id));
   }
 
   clearAllDones() {
-    const incompletedTodos = this.props.store.incompletedTodos;
-    this.props.store.todos.clear();
-    this.props.store.todos.push(...incompletedTodos);
+    this.props.dispatcher.dispatch(clearTodosAction());
   }
 
   render() {
