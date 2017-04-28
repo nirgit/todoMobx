@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import {observer} from 'mobx-react';
 
 import ProgressBar from './progressBar';
+import TodoList from './todoList';
 
-import {addTodoAction, toggleTodoDoneAction, clearTodosAction} from '../actions/actions';
+import {addTodoAction, clearTodosAction} from '../actions/actions';
 
 @observer
 class App extends React.Component {
@@ -28,15 +29,12 @@ class App extends React.Component {
     }
   }
 
-  toggleCheck(todo) {
-    this.props.dispatcher.dispatch(toggleTodoDoneAction(todo.id));
-  }
-
   clearAllDones() {
     this.props.dispatcher.dispatch(clearTodosAction());
   }
 
   render() {
+    console.log('rendering App');
     return <div>
         <h1>My (Mobx) Todo App</h1>
 
@@ -46,12 +44,7 @@ class App extends React.Component {
           <span>Add</span><input ref='todoInput' type='text' onKeyUp={(e) => this.addTodoByKey(e)}></input><button onClick={(e) => this.addTodoByClick(e)}>Add</button>
         </div>
 
-        <ul>{this.props.store.todos.map(todo =>
-            (<li key={todo.id}>
-                <input type="checkbox" onClick={this.toggleCheck.bind(this, todo)} checked={todo.isDone}/>{todo.value}
-              </li>)
-            )}
-        </ul>
+        <TodoList dispatcher={this.props.dispatcher} todos={this.props.store.todos} count={this.props.store.count} />
 
         <div>
           <a href="#" onClick={this.clearAllDones.bind(this)}>Clear all "Done"s</a>
