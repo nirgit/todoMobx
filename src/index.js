@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'mobx-react';
 
 import App from './components/app';
+import Container from './components/container';
 import ActionDispatcher from './actions/actionDispatcher';
 import Store from './store';
 
@@ -12,7 +14,12 @@ function start() {
 
   var appDiv = document.getElementById('app');
 
-  window.app = ReactDOM.render(<App dispatcher={actionDispatcher} store={store} />, appDiv);
+  window.app = ReactDOM.render(
+    <Provider store={store} dispatcher={actionDispatcher}>
+      <Container component={App} />
+    </Provider>,
+    appDiv
+    );
 }
 
 start();
