@@ -7,7 +7,7 @@ import TodoList from './todoList';
 
 import {addTodoAction, clearTodosAction} from '../actions/actions';
 
-@observer
+@observer(['store', 'dispatcher'])
 class App extends React.Component {
 
   addTodoByKey(e) {
@@ -44,7 +44,7 @@ class App extends React.Component {
           <span>Add</span><input ref='todoInput' type='text' onKeyUp={(e) => this.addTodoByKey(e)}></input><button onClick={(e) => this.addTodoByClick(e)}>Add</button>
         </div>
 
-        <TodoList dispatcher={this.props.dispatcher} todos={this.props.store.todos} count={this.props.store.count} />
+        <TodoList />
 
         <div>
           <a href="#" onClick={this.clearAllDones.bind(this)}>Clear all "Done"s</a>

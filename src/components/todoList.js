@@ -6,7 +6,7 @@ import Counter from './counter';
 
 import {toggleTodoDoneAction} from '../actions/actions';
 
-@observer
+@observer(['store', 'dispatcher'])
 class TodoList extends React.Component {
 
   toggleCheck(todo) {
@@ -16,13 +16,13 @@ class TodoList extends React.Component {
   render() {
     console.log('rendering TodoList');
     return <div>
-      <ul style={{listStyle: 'none'}}>{this.props.todos.map(todo =>
+      <ul style={{listStyle: 'none'}}>{this.props.store.todos.map(todo =>
           (<li key={todo.id} onClick={this.toggleCheck.bind(this, todo)} style={{cursor: 'pointer'}}>
               <input type="checkbox" checked={todo.isDone}/>{todo.value}
             </li>)
           )}
       </ul>
-      <Counter dispatcher={this.props.dispatcher} count={this.props.count} />
+      <Counter />
     </div>;
   }
 }
