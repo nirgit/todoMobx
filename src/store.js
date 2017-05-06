@@ -7,7 +7,6 @@ const randomizeIsDone = item => {
 };
 
 const Store = () => ({
-  @observable count: 0,
   @observable todos: ['buy milk', 'buy flour', 'buy cheese',
                       'make pizza', 'eat', 'do dishes'].map(Todo).map(randomizeIsDone),
 

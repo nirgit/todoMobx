@@ -25,10 +25,6 @@ const ActionHandler = (store) => {
         todoToToggle.forEach(it => it.isDone = !it.isDone);
         break;
       }
-      case ACTION_TYPE.INCREMENT_COUNTER: {
-        store.count++;
-        break;
-      }
       default: break;
     }
   }

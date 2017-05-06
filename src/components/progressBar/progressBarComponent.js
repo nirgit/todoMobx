@@ -8,7 +8,7 @@ class ProgressBarComponent extends React.Component {
   progressStyle = {maxWidth: '200px', background: '#8bc34a', position: 'absolute', height: '100%', width: '0px', transition: '0.25s ease width'};
 
   render() {
-    console.log('rendering ProgressBarComponent');
+    console.log('rendering', 'ProgressBarComponent');
     const percentage = (this.props.value / (this.props.total || 1));
     const funnyLabel = percentage === 0 ? 'You better start' : percentage === 1 ? 'Done Woohoo!' : 'Progress';
     const progressStyle = {width: (200 * percentage) + 'px'};
